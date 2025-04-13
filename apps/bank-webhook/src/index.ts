@@ -11,19 +11,11 @@ app.post("/hdfcWebhook", async (req, res) => {
         token: string;
         userId: string;
         amount: string;
-        status : string;
     } = {
         token: req.body.token,
         userId: req.body.user_identifier,
         amount: req.body.amount,
-        status : req.body.status
     };
-
-    if (paymentInformation.status !== "processing") {
-        return res.status(200).json({
-            message: "Duplicate Entry"
-        });
-    }
 
     try {
         await db.$transaction([
